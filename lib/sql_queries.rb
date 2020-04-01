@@ -92,7 +92,12 @@ end
 #group by name
 #order by names SUM
 def selects_user_names_and_amounts_of_all_pledges_grouped_by_name_then_orders_them_by_the_summed_amount
-  "Write your SQL query Here"
+  "SELECT users.name, pledges.amount
+    FROM users
+    JOIN pledges
+    ON pledges.user_id = users.id
+    GROUP BY name
+    ORDER BY SUM(pledges.amount)"
 end
 
 def selects_the_category_names_and_pledge_amounts_of_all_pledges_in_the_music_category
