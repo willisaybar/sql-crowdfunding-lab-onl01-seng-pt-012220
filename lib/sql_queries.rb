@@ -79,13 +79,12 @@ def selects_the_titles_and_amount_over_goal_of_all_projects_that_have_met_their_
   #   ON projects.id = pledges.project_id
   #   GROUP BY pledges.amount
   #   HAVING funding_goal <= pledges.amount"
-    "SELECT Projects.title, pledges.amount
-      AS amount_left
+    "SELECT Projects.title, SUM(pledges.amount) - projects.funding_goal
       FROM projects
       JOIN pledges
       ON projects.id = pledges.project_id
       GROUP BY projects.title
-      HAVING projects.funding_goal <= SUM(amount_left)"
+      HAVING SUM(projects.funding_goal) >= amount_left"
 end
 
 def selects_user_names_and_amounts_of_all_pledges_grouped_by_name_then_orders_them_by_the_summed_amount
