@@ -73,12 +73,17 @@ end
 #look at pledges
 #find projects that have been fully funded
 def selects_the_titles_and_amount_over_goal_of_all_projects_that_have_met_their_funding_goal
-  "SELECT Projects.title, Pledges.amount
-    FROM projects
-    LEFT OUTER JOIN pledges
-    ON projects.id = pledges.project_id
-    GROUP BY pledges.amount
-    HAVING funding_goal <= pledges.amount"
+  # "SELECT Projects.title, Pledges.amount
+  #   FROM projects
+  #   LEFT OUTER JOIN pledges
+  #   ON projects.id = pledges.project_id
+  #   GROUP BY pledges.amount
+  #   HAVING funding_goal <= pledges.amount"
+    "SELECT Projects.title, Pledges.amount
+      FROM projects
+      LEFT OUTER JOIN pledges
+      ON projects.id = pledges.project_id
+      WHERE funding_goal <= pledges.amount"
 end
 
 def selects_user_names_and_amounts_of_all_pledges_grouped_by_name_then_orders_them_by_the_summed_amount
